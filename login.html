@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> MHIG: Login Screen </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="body_login_1">
+    <div id="header"><h2>.</h2></div>
+    <div class="box">
+        <div class="form">
+            <h2>Login Page</h2>
+                <div class="inputbox">
+                    <input type="text" value="" id="username" required>
+                    <span> Login Number ID </span>
+                </div>
+                <div class="inputbox">
+                    <input type="age" value="" id="age" required>
+                    <span> Current Age </span>
+                </div>
+                <button id="submit" class="sub" > Submit </button>
+        </div>
+    </div>
+    <div id="footer"><h2>.</h2></div>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js" type="module"></script>
+    <script type ="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getDatabase, ref, get, child, update } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCEjbKjo7bLbXsLm2FFS3nb5TjXNXMg2lc",
+            authDomain: "mhig-edde5.firebaseapp.com",
+            projectId: "mhig-edde5",
+            storageBucket: "mhig-edde5.appspot.com",
+            messagingSenderId: "855050639590",
+            appId: "1:855050639590:web:84c985fb7c8e066681c327"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const dbref = ref(database);
+
+        document.getElementById("submit").addEventListener("click", function(e){
+            console.log("entered");
+            const userID = document.getElementById("username").value;
+            const age = document.getElementById("age").value;
+
+            // Check if the user ID exists in the database
+            get(child(dbref, `user/${userID}`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    // Update user's age in the database
+                    update(ref(database, `user/${userID}`), { patient_age: age })
+                        .then(() => {
+                            alert("Age updated successfully!");
+                            window.location.replace("q1.html")
+                        })
+                        .catch(error => {
+                            console.error("Error updating age:", error);
+                        });
+                    localStorage.setItem("userID", userID);
+                } else {
+                    alert("User not found!");
+                    window.location.replace("q1.html")
+                }
+            }).catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
+        });
+
+    </script>
+</body>
+</html>

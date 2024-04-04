@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> MHIG </title>
+
+<!--fonts-->
+
+<!--bootstrap classes-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!--linking css & html-->	
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div id="header"><h2></h2></div>
+
+	<div class="container" id="holds_column_1" class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div">
+        <h1 id="title_para_1" class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div"> Welcome! </h1>
+		<div class="row" id="row_para_1" >
+			<p id="text_para_1"> <button id="audio_button_1" onclick="audio_intro_button()" >🔉</button>Hi! I'm <button id="mhig_button_1" onclick=openPopupMHIG()>MHIG</button>, and I'm here to assist you today! Please click the audio button for audial instructions. You may also click my name in green to see what it stands for!</p>
+			<p id="text_para_1">Today I will ask you a few questions to gather some data about your mental health.  Afterwards, you can either decide to take a look at my evaluation suggestions or simply keep the data to show your doctor. </p>
+		</div>
+		<img id="robot_img_1" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHVwZjBwaGV1a3dvMjE4M2ljOXUwMzNqNDV1NmVjbXFvdWduamkzeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/9yRMxLuRqyQ0x3jJXD/giphy.gif">
+		<button id ="next_button_1" onclick = "next_arrow_button()"> ➡️ </button>
+	</div>
+
+	<div class="popup" id="popup">
+		<h3 id="title_h3_popup"> What does MHIG stand for? </h2>
+		<p id="text_para_popup"> MHIG is a virtual robot that stands for Mental Health Information Gatherer. </p>
+		<button id="done_button_popup" onclick="closePopupMHIG()"> Got it! </button>
+	</div>
+
+	<div id="footer"><h2></h2></div>
+
+	<script>
+		popup = document.getElementById("popup");
+
+		function openPopupMHIG() {
+			popup.classList.add("open-popup");
+			}
+
+		function closePopupMHIG() {
+			popup.classList.remove("open-popup");
+			}
+
+			let utterance = null;
+
+		function speak() {
+			utterance = new SpeechSynthesisUtterance();
+			utterance.text = "Hi! I'm Mig, and I'm here to assist you today! You may also click my name in green to see what it stands for! Today I will ask you a few questions to gather some data about your mental health. Afterwards, you can either decide to take a look at my evaluation suggestions or simply keep the data to show your doctor. Click the arrow below to continue.";
+
+			window.speechSynthesis.onvoiceschanged = function() {
+				const voices = window.speechSynthesis.getVoices();
+				const voice = voices.find(v => v.name === 'Microsoft Zira - English (United States)');
+				if (voice) {
+					utterance.voice = voice;
+					window.speechSynthesis.speak(utterance); 
+				} else {
+					console.error('Voice not found: Microsoft Zira - English (United States)');
+				}
+			};
+		}
+
+		function stop() {
+			if (utterance && window.speechSynthesis.speaking) {
+				window.speechSynthesis.cancel();
+			}
+		}
+
+		function audio_intro_button() {
+				if (utterance && window.speechSynthesis.speaking) {
+					stop();
+				} else {
+					speak();
+				}
+		}
+		
+		function next_arrow_button(){
+			window.location="new_user.html";
+		}
+
+	</script>
+
+</body>
+</html>
