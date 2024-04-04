@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> MHIG </title>
+    <!--fonts-->
+    <!--bootstrap classes-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!--linking css & js-->    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"></script>
+    <script src="script.js" type="module"></script>
+</head>
+
+<body>
+    <div id="header"><h2></h2></div>
+    <div class="contains" id="q1">
+        <h3 id="question_text">Over the past few weeks, how do you feel about your daily activities/hobbies?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button1.1" class="answer_button">🔘</button> I don’t feel like engaging in any of the previous activities I was part of.  </p>
+            <p class="answer_text"> <button id="answer_button1.2" class="answer_button">🔘</button>I still take part in my previous activities but don’t feel as excited about them. </p>
+            <p class="answer_text"> <button id="answer_button1.3" class="answer_button">🔘</button> Some of my previous hobbies have died down, but I am still going on with the others. </p>
+            <p class="answer_text"> <button id="answer_button1.4" class="answer_button">🔘</button> Great! I am still excited to take part in them! </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q2">
+        <h3 id="question_text">Have you lost or gained more than 6 pounds in body weight in the past week?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button2.1" class="answer_button">🔘</button> Yes, I know for sure. </p>
+            <p class="answer_text"> <button id="answer_button2.2" class="answer_button">🔘</button> I think so, I feel very concsious about my weight, but I haven't exactly checked for sure. </p>
+            <p class="answer_text"> <button id="answer_button2.3" class="answer_button">🔘</button> No, I don't think so. </p>
+            <p class="answer_text"> <button id="answer_button2.4" class="answer_button">🔘</button> I have not gained weight, I keep very fit every day! </p>
+        </div>
+    </div>
+    <div class="contains hidden" id="q3">
+        <h3 id="question_text">How long does it take for you to go to sleep?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button3.1" class="answer_button">🔘</button> Mostly restless or I feel like only get 1-2 hours of sleep </p>
+            <p class="answer_text"> <button id="answer_button3.2" class="answer_button">🔘</button> I feel like my brain wanders for hours before i go to sleep </p>
+            <p class="answer_text"> <button id="answer_button3.3" class="answer_button">🔘</button> 30 minutes and I am fast asleep  </p>
+            <p class="answer_text"> <button id="answer_button3.4" class="answer_button">🔘</button> Just a few minutes </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q4">
+        <h3 id="question_text">What would you do if you had time to relax but nothing else around you?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button4.1" class="answer_button">🔘</button> I can’t relax. My mind is a tornado of thoughts, and I couldn’t possibly sit still.  </p>
+            <p class="answer_text"> <button id="answer_button4.2" class="answer_button">🔘</button> I would try to rest… but I’d end up being distracted by a stray thought. </p>
+            <p class="answer_text"> <button id="answer_button4.3" class="answer_button">🔘</button> I’d get carried away by a train of thoughts that leads to a daydream. </p>
+            <p class="answer_text"> <button id="answer_button4.4" class="answer_button">🔘</button> I’d take the time to just relax. Maybe meditate.  </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q5">
+        <h3 id="question_text">Lately, how sluggish, or slowed down, have you been feeling mentally or physically?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button5.1" class="answer_button">🔘</button>I feel dragged down by the weight of everything, and it’s slowing me down.</p>
+            <p class="answer_text"> <button id="answer_button5.2" class="answer_button">🔘</button> I’m so tired, making me sluggish. </p>
+            <p class="answer_text"> <button id="answer_button5.3" class="answer_button">🔘</button> I’m not that sluggish but I could be better. </p>
+            <p class="answer_text"> <button id="answer_button5.4" class="answer_button">🔘</button> Not at all! I’m at full energy and always at max speed!</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q6">
+        <h3 id="question_text">If your friends suggested to go out to do something that you usually like doing, what would be your initial thought?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button6.1" class="answer_button">🔘</button>Usually, I would want to go… but I’m not feeling it. I feel drained and exhausted. Small tasks take too much energy.</p>
+            <p class="answer_text"> <button id="answer_button6.2" class="answer_button">🔘</button> I really want to go… but I’m way too tired. Life just drains all my energy. </p>
+            <p class="answer_text"> <button id="answer_button6.3" class="answer_button">🔘</button> I’d agree, but mostly because I don’t want to be left out. I’m a little tired but hopefully that will pass soon.</p>
+            <p class="answer_text"> <button id="answer_button6.4" class="answer_button">🔘</button> I’d be out that door before we end the call. After all, I wouldn’t pass up on a chance to meet my friends!</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q7">
+        <h3 id="question_text">You were in a project with your friends and you got a bad grade in spite of everything you could possibly do. What is your immediate reaction?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button7.1" class="answer_button">🔘</button>We got a bad grade because of me. I have failed my team. I should go apologize to my teammates for failing them </p>
+            <p class="answer_text"> <button id="answer_button7.2" class="answer_button">🔘</button> Did I not try hard enough? After everything I did, it still wasn’t enough.</p>
+            <p class="answer_text"> <button id="answer_button7.3" class="answer_button">🔘</button> I should have done it. I won’t make this mistake next time.</p>
+            <p class="answer_text"> <button id="answer_button7.4" class="answer_button">🔘</button>I’m a bit disappointed, but I know that we tried our best. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q8">
+        <h3 id="question_text">What have been your thoughts when you think about suicide?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button8.1" class="answer_button">🔘</button>Sometimes, I do feel a little extreme, but somehow I get by. </p>
+            <p class="answer_text"> <button id="answer_button8.2" class="answer_button">🔘</button>I don’t commit suicide because I worry about my family/friends and how they would feel if i wasn’t there. </p>
+            <p class="answer_text"> <button id="answer_button8.3" class="answer_button">🔘</button> I sometimes don’t like my current situation in life, but I don’t want to take to the level of suicide. </p>
+            <p class="answer_text"> <button id="answer_button8.4" class="answer_button">🔘</button>I don’t think anything should be taken to the level of suicide. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q9">
+        <h3 id="question_text">If your sibling or someone you care about does something slightly frustrating, like continuously coming into your room even after you told them not to, what would you do?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button9.1" class="answer_button">🔘</button> Finally snap and yell at them. Why don’t they just LISTEN TO ME!? But then I might feel bad for doing it </p>
+            <p class="answer_text"> <button id="answer_button9.2" class="answer_button">🔘</button>I wouldn’t react, but be highly annoyed at them for the rest of the day. They need to respect my boundaries. </p>
+            <p class="answer_text"> <button id="answer_button9.3" class="answer_button">🔘</button> At first I’d be annoyed, then I’d give up. I’ll tell myself that eventually they’ll leave. </p>
+            <p class="answer_text"> <button id="answer_button9.4" class="answer_button">🔘</button>I wouldn’t mind. After all, I do care about them, and yelling at them wouldn’t solve any problems, just create more </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q10">
+        <h3 id="question_text">How do you feel about your life, either ahead and looking forward?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button10.1" class="answer_button">🔘</button>I gave up. I feel like life is empty, and trying to hope for the future isn’t going to help at all.</p>
+            <p class="answer_text"> <button id="answer_button10.2" class="answer_button">🔘</button> Life is tough; always has been, always will be. That’s the way it’s supposed to be, anyway. I’m not optimistic, but I’m not a pessimist either. I’m just being real here, guys. </p>
+            <p class="answer_text"> <button id="answer_button10.3" class="answer_button">🔘</button> I love my life and I’m not going to let it go to waste. Although I’m not hopeful for the future, I’m certain that I can face whatever challenges face me.</p>
+            <p class="answer_text"> <button id="answer_button10.4" class="answer_button">🔘</button>The future is brighter than the rising sun! I’ve been content so far, and I’m sure the future will bring more of the same.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q11">
+        <h3 id="question_text">About how much has your diet changed over the past?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button11.1" class="answer_button">🔘</button>I have barely eaten at all these last couple of days. </p>
+            <p class="answer_text"> <button id="answer_button11.2" class="answer_button">🔘</button>So much stress that I eat a lot. I mean, food is good. </p>
+            <p class="answer_text"> <button id="answer_button11.3" class="answer_button">🔘</button> I guess I’ve been eating less than usual, but that’s just because I have less time to.</p>
+            <p class="answer_text"> <button id="answer_button11.4" class="answer_button">🔘</button>I don’t know, I really just eat whatever I feel like.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q12">
+        <h3 id="question_text">What do you do when you have work pending and you have some spare time?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button12.1" class="answer_button">🔘</button>I rarely do anything, because I just don't have energy for it. </p>
+            <p class="answer_text"> <button id="answer_button12.2" class="answer_button">🔘</button>I procrastinate a lot, but I do get stuff done right before I need to. </p>
+            <p class="answer_text"> <button id="answer_button12.3" class="answer_button">🔘</button>After thinking about working for a while, I get up and get it done. After all, I don’t want to do it later.</p>
+            <p class="answer_text"> <button id="answer_button12.4" class="answer_button">🔘</button>I will get it done. I’m not one to leave tasks until later, because the workload is just going to increase. And why should I waste my time?</p>
+        </div>
+    </div>
+    <div class="contains hidden" id="q13">
+        <h3 id="question_text">On an average, how many hours of sleep are you getting?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button13.1" class="answer_button">🔘</button>1-3 hours </p>
+            <p class="answer_text"> <button id="answer_button13.2" class="answer_button">🔘</button>4-6 hours </p>
+            <p class="answer_text"> <button id="answer_button13.3" class="answer_button">🔘</button>7-9 hours</p>
+            <p class="answer_text"> <button id="answer_button13.4" class="answer_button">🔘</button>10-12</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q14">
+        <h3 id="question_text">When you are learning a new skill, what is your thought process?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button14.1" class="answer_button">🔘</button>I am unable to feel that I am good at a certain skill, after experiencing failures and/or seeing others excel.  </p>
+            <p class="answer_text"> <button id="answer_button14.2" class="answer_button">🔘</button>I won’t do things that I am not good at, as there are better people than me to do the task. </p>
+            <p class="answer_text"> <button id="answer_button14.3" class="answer_button">🔘</button>I know my strengths and weaknesses and can assess what I need to improve on</p>
+            <p class="answer_text"> <button id="answer_button14.4" class="answer_button">🔘</button>I am confident that I can do whatever I put my mind to regardless of previous failures. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q15">
+        <h3 id="question_text">When listening/attending a lecture about a topic in your school/work/other, how would you describe your concentration?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button15.1" class="answer_button">🔘</button>I have trouble concentrating on it and am usually not focusing on it, but doing something else entirely.  </p>
+            <p class="answer_text"> <button id="answer_button15.2" class="answer_button">🔘</button>My mind always wanders, and I try to bring it back to the topic: I tend to shift gears frequently.  </p>
+            <p class="answer_text"> <button id="answer_button15.3" class="answer_button">🔘</button>I like to take breaks (walking around, going on my phone) between listening and doing something else, because it helps my brain relax.</p>
+            <p class="answer_text"> <button id="answer_button15.4" class="answer_button">🔘</button> I am only paying attention to the lecture, and my mind barely goes to other topics. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q16">
+        <h3 id="question_text">If you are deciding between two clothes to wear when you are getting ready, how do you decide what to wear? </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button16.1" class="answer_button">🔘</button>I just can’t decide what to do, and ask someone else to decide for me. They might have a better idea/view on the situation than me.</p>
+            <p class="answer_text"> <button id="answer_button16.2" class="answer_button">🔘</button>I spend quite a bit of time making the decision because I don’t want to face the consequences of choosing the wrong option. </p>
+            <p class="answer_text"> <button id="answer_button16.3" class="answer_button">🔘</button>I don’t spend much time deciding and can pick fairly quickly.</p>
+            <p class="answer_text"> <button id="answer_button16.4" class="answer_button">🔘</button> I look at my options and then decide what is best for me using the pros and cons of each option. It doesn’t take me that long. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q17">
+        <h3 id="question_text">When facing a problem/issue that comes your way (such as something that is broken and is not working), how do you deal with and feel about it?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button17.1" class="answer_button">🔘</button>I am hopeless, and I don’t even try to think about or solve the problem as I know that it cannot be solved. </p>
+            <p class="answer_text"> <button id="answer_button17.2" class="answer_button">🔘</button>I try to find solutions, and if they are too complicated/take too long, I back off. </p>
+            <p class="answer_text"> <button id="answer_button17.3" class="answer_button">🔘</button>I try to find solutions, and if they are too complicated, I ask for help from others. </p>
+            <p class="answer_text"> <button id="answer_button17.4" class="answer_button">🔘</button>When problems like this come, I try my best to solve the issue with a positive attitude </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q18">
+        <h3 id="question_text">You’re playing a video game and you lose because of an internet issue, how would you react? </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button18.1" class="answer_button">🔘</button>What on earth?!? I lost and it wasn’t even my fault!! I’ll yeet the device across the room to feel better.</p>
+            <p class="answer_text"> <button id="answer_button18.2" class="answer_button">🔘</button>God not again! I don’t think I wanna play anymore. This is really annoying to deal with.</p>
+            <p class="answer_text"> <button id="answer_button18.3" class="answer_button">🔘</button>Aw man!! I’ll have to start again, this is so annoying!!</p>
+            <p class="answer_text"> <button id="answer_button18.4" class="answer_button">🔘</button>Deep breath…It's just a game. It’s not the end of the world, I can play again and I’ll win this time. No biggie! </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q19">
+        <h3 id="question_text">You did not get the grade you wanted on a test, which of the following describes how you feel?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button19.1" class="answer_button">🔘</button>I’m a worthless human being. I’m a burden to this planet. I should probably just end myself.</p>
+            <p class="answer_text"> <button id="answer_button19.2" class="answer_button">🔘</button>I knew it, I always knew I couldn't do this. I wish I was better at this class.</p>
+            <p class="answer_text"> <button id="answer_button19.3" class="answer_button">🔘</button>I just really don’t care about anything at all.</p>
+            <p class="answer_text"> <button id="answer_button19.4" class="answer_button">🔘</button>I tried…it’s fine, I’ll do better next time.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q20">
+        <h3 id="question_text">Do you often feel sad on a daily basis?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button20.1" class="answer_button">🔘</button>I’m always feeling miserable, I could just die of sadness right now. </p>
+            <p class="answer_text"> <button id="answer_button20.2" class="answer_button">🔘</button>I get a little sad sometimes but mostly I feel normal unless something really bad happens like my dog or grandmother dying.</p>
+            <p class="answer_text"> <button id="answer_button20.3" class="answer_button">🔘</button>I honestly have no idea</p>
+            <p class="answer_text"> <button id="answer_button20.4" class="answer_button">🔘</button> I like to smile my problems off. If I’m feeling sad, I find a reason to cheer myself up so that i’m not sad anymore</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q21">
+        <h3 id="question_text">Do you often have “phases” where you are unusually upbeat or wired?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button21.1" class="answer_button">🔘</button>Yes! Sometimes, I’m highly active, but other times I feel tired. </p>
+            <p class="answer_text"> <button id="answer_button21.2" class="answer_button">🔘</button>My mood is always like that, except for occasional bursts of exhaustion.</p>
+            <p class="answer_text"> <button id="answer_button21.3" class="answer_button">🔘</button>Very rarely, my mood is elevated to that level, but only for appropriate situations.</p>
+            <p class="answer_text"> <button id="answer_button21.4" class="answer_button">🔘</button> No, my mood is pretty stable most of the time</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q22">
+        <h3 id="question_text">Do you have phases of increased energy?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button22.1" class="answer_button">🔘</button>Yes, and these phases often come for no apparent reason at all!</p>
+            <p class="answer_text"> <button id="answer_button22.2" class="answer_button">🔘</button>Sometimes, but mostly my energy level is stable.</p>
+            <p class="answer_text"> <button id="answer_button22.3" class="answer_button">🔘</button>Sometimes after a cup of coffee or a can of Monster, I have a period of sugar buzz but unless that counts, no.</p>
+            <p class="answer_text"> <button id="answer_button22.4" class="answer_button">🔘</button>Well, sometimes after a particularly good sleep, yes. But otherwise my energy levels are stable.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q23">
+        <h3 id="question_text">Do you have periods where you are very confident in yourself, and others when you aren’t? Pick the option whose level of extremity matches your situation.</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button23.1" class="answer_button">🔘</button>Yes, and the swing between these are quite extreme. During the highs I feel invincible, while the lows bring thoughts of inadequacy and self-loathing.</p>
+            <p class="answer_text"> <button id="answer_button23.2" class="answer_button">🔘</button>No, I rarely ever have any confidence in myself. Why should I?</p>
+            <p class="answer_text"> <button id="answer_button23.3" class="answer_button">🔘</button>Of course, but not very extreme. More like, one day I feel like I’m looking amazing and the next I don’t.</p>
+            <p class="answer_text"> <button id="answer_button23.4" class="answer_button">🔘</button>No, I have full confidence in myself, all the time! Well, most of the time, anyway.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q24">
+        <h3 id="question_text">Suppose you have a huge project due tomorrow and you have quite a bit of work to do. What do you do?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button24.1" class="answer_button">🔘</button>I’ll try to do it but end up falling asleep at my desk.</p>
+            <p class="answer_text"> <button id="answer_button24.2" class="answer_button">🔘</button>Nope, I’m not staying up, I’m not a night person. I’ll wake up early the next morning to do the project, and try to do as much as I can.</p>
+            <p class="answer_text"> <button id="answer_button24.3" class="answer_button">🔘</button>I will stay up all night to finish it, or at least as much as I need to. I’ll probably play a video game, read a book, or something else after that, because I don’t really need sleep.</p>
+            <p class="answer_text"> <button id="answer_button24.4" class="answer_button">🔘</button>I’ll stay up to do it but try to finish as soon as possible. I do need some sleep, after all, even if I can go a few hours without it.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q25">
+        <h3 id="question_text">Do you seem to recently have stop points in times where you are usually super talkative?</h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button25.1" class="answer_button">🔘</button>Yes, sometimes I cannot be compelled to speak at all while others I just have a rush of words.</p>
+            <p class="answer_text"> <button id="answer_button25.2" class="answer_button">🔘</button>I talk a lot most of the time anyway. </p>
+            <p class="answer_text"> <button id="answer_button25.3" class="answer_button">🔘</button>I’m quiet most of the time so…</p>
+            <p class="answer_text"> <button id="answer_button25.4" class="answer_button">🔘</button>Not exactly, I talk when I want to but I’m not too over-the-top with it. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q26">
+        <h3 id="question_text">Do you feel like you can keep up with your thoughts often?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button26.1" class="answer_button">🔘</button>Not at all. Sometimes it’s like a bullet train that I somehow have to grab onto- and even then, I don’t know where it’s going to take me.</p>
+            <p class="answer_text"> <button id="answer_button26.2" class="answer_button">🔘</button>Kind of, but my thoughts are very random. I get distracted very easily so the trajectory of that train changes in the blink of an eye.</p>
+            <p class="answer_text"> <button id="answer_button26.3" class="answer_button">🔘</button>I get somewhat distracted, and my thoughts sometimes speed up, but for the most part I feel like I can keep my footing.</p>
+            <p class="answer_text"> <button id="answer_button26.4" class="answer_button">🔘</button>Of course! I control my thoughts, not the other way around, and I don’t get distracted easily.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q27">
+        <h3 id="toobigquestion_text">Waves of sadness come and go for everyone. How do you feel about the future during this time?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text2big"> <button id="answer_button27.1" class="answer_button">🔘</button>During waves of sadness, I feel like I should give up. I feel like life is empty, and trying to hope for the future isn’t going to help at all. These waves, however, pass.</p>
+            <p class="answer_text2big"> <button id="answer_button27.2" class="answer_button">🔘</button>Well, I ALWAYS feel like things aren’t hopeful - they’re not meant to be easy. That’s what life is; finding your way through it.</p>
+            <p class="answer_text2big"> <button id="answer_button27.3" class="answer_button">🔘</button>These bouts of hopelessness come very rarely, and only after very shaking events. Even then, I know that though life is tough I will find a way through as I have so far.</p>
+            <p class="answer_text2big"> <button id="answer_button27.4" class="answer_button">🔘</button>I rarely ever see these waves of sadness. I’m almost always happy, almost always optimistic, almost always feel like the future is bright, and I’m not afraid of facing it.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q28">
+        <h3 id="question_text">Over the past few weeks, how do you feel about your daily activities/hobbies?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button28.1" class="answer_button">🔘</button>Sometimes, I don’t feel like engaging in any of the previous activities I loved. These waves come with less motivation and interest.</p>
+            <p class="answer_text"> <button id="answer_button28.2" class="answer_button">🔘</button>I still take part in activities but sometimes I don’t feel excited about them.</p>
+            <p class="answer_text"> <button id="answer_button28.3" class="answer_button">🔘</button>Some of my previous hobbies have died down, but I am still going on with the others. I don’t lose interest in these though.</p>
+            <p class="answer_text"> <button id="answer_button28.4" class="answer_button">🔘</button>I’ve loved the activities I continue to do, and I will continue to enjoy them. This is not through external pressure but through my own willingness to do these activities.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q29">
+        <h3 id="question_text">When you’re not dieting, does your appetite fluctuate a lot?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button29.1" class="answer_button">🔘</button>Sometimes, I’m ravenous, and sometimes I don’t feel like eating at all.</p>
+            <p class="answer_text"> <button id="answer_button29.2" class="answer_button">🔘</button>I have a larger (or smaller) appetite during certain phases but other times I’m normal.</p>
+            <p class="answer_text"> <button id="answer_button29.3" class="answer_button">🔘</button>My appetite is normal but I do eat more/less sometimes when I feel like it.</p>
+            <p class="answer_text"> <button id="answer_button29.4" class="answer_button">🔘</button>Nope, my appetite stays stable.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q30">
+        <h3 id="question_text">Do you have trouble sleeping or waking up during the “down” phases?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button30.1" class="answer_button">🔘</button>I have trouble falling asleep during these phases. Haunting thoughts keep me awake.</p>
+            <p class="answer_text"> <button id="answer_button30.2" class="answer_button">🔘</button>I sleep a lot during this time - it’s a way to avoid sadness. I try to sleep out the sadness.</p>
+            <p class="answer_text"> <button id="answer_button30.3" class="answer_button">🔘</button>Sometimes I sleep a little late, or sleep in, but not too much.</p>
+            <p class="answer_text"> <button id="answer_button30.4" class="answer_button">🔘</button>Very rarely I deviate from my set sleep schedule. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q31">
+        <h3 id="question_text">Do you have phases of decreased energy?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button31.1" class="answer_button">🔘</button>Yes. These phases catch me off-guard because usually, right before, I’m at maximum energy.</p>
+            <p class="answer_text"> <button id="answer_button31.2" class="answer_button">🔘</button>Sometimes, but mostly my energy level is stable.</p>
+            <p class="answer_text"> <button id="answer_button31.3" class="answer_button">🔘</button>Sometimes this happens, but nothing a good cup of coffee can’t fix.</p>
+            <p class="answer_text"> <button id="answer_button31.4" class="answer_button">🔘</button>If I don’t get enough sleep, yes. Otherwise, I have very stable energy levels.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q32">
+        <h3 id="question_text">Suppose you are in a group competition and you lost. What is your first thought?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button32.1" class="answer_button">🔘</button>We lost because of me. I wasn’t enough of a help to the team.</p>
+            <p class="answer_text"> <button id="answer_button32.2" class="answer_button">🔘</button>I can’t believe we lost. After everything we’ve done? All the work we put in? </p>
+            <p class="answer_text"> <button id="answer_button32.3" class="answer_button">🔘</button>Maybe I should have tried to help more. I will learn from my mistakes and do better next time.</p>
+            <p class="answer_text"> <button id="answer_button32.4" class="answer_button">🔘</button>Aww. Well, we always have more chances. Hopefully another one comes soon!</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q33">
+        <h3 id="question_text">Say you are in the car with your family and they ask you to break the tie between playing two songs that you like equally. You are almost at your destination, so you can only pick one song. What do you do?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button33.1" class="answer_button">🔘</button>At first, I don’t even process the question because I’m not paying attention. However, I would rather not listen to music at all than have to make a decision like this.</p>
+            <p class="answer_text"> <button id="answer_button33.2" class="answer_button">🔘</button>Once I figure out what they are asking, I still can’t decide, and so, we reach by the time I pick one.</p>
+            <p class="answer_text"> <button id="answer_button33.3" class="answer_button">🔘</button>If I really don’t know, I’ll pick one at random. No harm, after all.</p>
+            <p class="answer_text"> <button id="answer_button33.4" class="answer_button">🔘</button>I just picked one. It’s just that simple.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q34">
+        <h3 id="question_text">What do you think about suicide?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button34.1" class="answer_button">🔘</button>I’ve been thinking about it a lot recently. Maybe even planning, or have already attempted. </p>
+            <p class="answer_text"> <button id="answer_button34.2" class="answer_button">🔘</button>Sure, sometimes I’m sad about life, but I have to survive. I have to keep going.</p>
+            <p class="answer_text"> <button id="answer_button34.3" class="answer_button">🔘</button>Of course not. I’m not committing suicide, because I care too much about the people who care about me.</p>
+            <p class="answer_text"> <button id="answer_button34.4" class="answer_button">🔘</button>I love my life too much to let it go. Suicide is not the answer when things get tough.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q35">
+        <h3 id="question_text">During the winter time, do you feel significantly more disheartened and despondent, than during the summer time?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button35.1" class="answer_button">🔘</button>Yes, most of the time I do feel this way, and it affects my mood regularly. </p>
+            <p class="answer_text"> <button id="answer_button35.2" class="answer_button">🔘</button>Yes, sometimes I do feel a little sad when it is gloomy and less sunny outside.</p>
+            <p class="answer_text"> <button id="answer_button35.3" class="answer_button">🔘</button>Please bring summer back!</p>
+            <p class="answer_text"> <button id="answer_button35.4" class="answer_button">🔘</button>The weather doesn’t seem to affect my mood that much.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q36">
+        <h3 id="question_text">You just woke up to a cold winter morning, how do you feel?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button36.1" class="answer_button">🔘</button>Tired, I just want to go back to bed!</p>
+            <p class="answer_text"> <button id="answer_button36.2" class="answer_button">🔘</button>Let's get this day over with. </p>
+            <p class="answer_text"> <button id="answer_button36.3" class="answer_button">🔘</button>The weather doesn’t seem to affect my mood that much.</p>
+            <p class="answer_text"> <button id="answer_button36.4" class="answer_button">🔘</button>Energetic, and ready to start the day!</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q37">
+        <h3 id="question_text">Do you eat more during the winter?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button37.1" class="answer_button">🔘</button>I love having a nice buffet every winter day!</p>
+            <p class="answer_text"> <button id="answer_button37.2" class="answer_button">🔘</button>I mean, I usually don't mind a nice feast during a cold winter day. </p>
+            <p class="answer_text"> <button id="answer_button37.3" class="answer_button">🔘</button>I don't really care, food is food! </p>
+            <p class="answer_text"> <button id="answer_button37.4" class="answer_button">🔘</button>I eat the same amount everyday!</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q38">
+        <h3 id="question_text"> Your teacher is explaining a very difficult topic. What do you do?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button38.1" class="answer_button">🔘</button>Look at the cold winter abyss out the window.</p>
+            <p class="answer_text"> <button id="answer_button38.2" class="answer_button">🔘</button>Spin my pencil around while the teacher is drawing concepts on the board.</p>
+            <p class="answer_text"> <button id="answer_button38.3" class="answer_button">🔘</button>Discuss the topic with my group.</p>
+            <p class="answer_text"> <button id="answer_button38.4" class="answer_button">🔘</button>Focus strictly on the teacher.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q39">
+        <h3 id="question_text"> Your sibling is repeatedly knocking on your door? What do you do?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button39.1" class="answer_button">🔘</button>Scream at him with your uncontrollable rage.</p>
+            <p class="answer_text"> <button id="answer_button39.2" class="answer_button">🔘</button>Playing music or white noise to mask the sound of the knocking without directly confronting them.</p>
+            <p class="answer_text"> <button id="answer_button39.3" class="answer_button">🔘</button>Waiting silently until they stop knocking, indicating that you're occupied and not available.</p>
+            <p class="answer_text"> <button id="answer_button39.4" class="answer_button">🔘</button>Sending a polite text or message if possible, asking them to stop knocking as you're busy.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q40">
+        <h3 id="question_text"> Your dad asks him to watch a movie with him, which is usually one of your favorite acitivites, and today you are free! However, its a cold winter day, and you are not 100% sure if that's what you wanna do today. What do you say?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button40.1" class="answer_button">🔘</button>Movies are too long and boring. I'm sorry Dad, but I am going to sleep.</p>
+            <p class="answer_text"> <button id="answer_button40.2" class="answer_button">🔘</button>My teachers have "assigned" a lot of homework, so I will not be able to watch a movie, Dad.</p>
+            <p class="answer_text"> <button id="answer_button40.3" class="answer_button">🔘</button>Sure Dad, but I have to choose the movie!</p>
+            <p class="answer_text"> <button id="answer_button40.4" class="answer_button">🔘</button>SI will grab popcorn, Dad! Be there in a minute! </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q41">
+        <h3 id="question_text"> You aren’t getting the results you want while working out for 3 months. What do you do?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button41.1" class="answer_button">🔘</button>Give up on my diet, because there is no point anymore.</p>
+            <p class="answer_text"> <button id="answer_button41.2" class="answer_button">🔘</button>Leave the gym and never come back.</p>
+            <p class="answer_text"> <button id="answer_button41.3" class="answer_button">🔘</button>Take a stroll outside, and think about why you aren't getting any results.</p>
+            <p class="answer_text"> <button id="answer_button41.4" class="answer_button">🔘</button>Research more fitness routines, and workout more. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q42">
+        <h3 id="question_text"> Do you feel secluded, as if you are in a white room with nothing but your thoughts?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button42.1" class="answer_button">🔘</button>Yes, I mostly feel like my thoughts are the only thing giving me company.</p>
+            <p class="answer_text"> <button id="answer_button42.2" class="answer_button">🔘</button>Occasionally I like to be left alone, but I still believe that there is always someone for me.</p>
+            <p class="answer_text"> <button id="answer_button42.3" class="answer_button">🔘</button>No, I am always attached to my friends and family.</p>
+            <p class="answer_text"> <button id="answer_button42.4" class="answer_button">🔘</button>I have no idea how to be alone. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q43">
+        <h3 id="question_text"> Do you say that you sleep more in the winter than in the summer?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button43.1" class="answer_button">🔘</button>Of course! In the summer I have trouble falling, but in the winter I just knock out until the morning.</p>
+            <p class="answer_text"> <button id="answer_button43.2" class="answer_button">🔘</button>No, it’s the other way around. I can’t sleep at all in the winter but during summer, once I’m out I’m OUT.</p>
+            <p class="answer_text"> <button id="answer_button43.3" class="answer_button">🔘</button>Sort of. I stay awake more in the summer because I have more time.</p>
+            <p class="answer_text"> <button id="answer_button43.4" class="answer_button">🔘</button>Not at all! My sleep schedule stays pretty consistent.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q44">
+        <h3 id="question_text">  Suppose your sibling annoys you in the summer. How different would you react compared to the winter? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button44.1" class="answer_button">🔘</button>I would be very irritable and yell at them. In the winter, though, I’m the epitome of calm.</p>
+            <p class="answer_text"> <button id="answer_button44.2" class="answer_button">🔘</button>I’d get mad at them, but not much more than the winter. I’m always in a state of annoyance.</p>
+            <p class="answer_text"> <button id="answer_button44.3" class="answer_button">🔘</button>I’d get slightly annoyed but not too extreme.</p>
+            <p class="answer_text"> <button id="answer_button44.4" class="answer_button">🔘</button>Why would I get mad at them?</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q45">
+        <h3 id="question_text">  Do you ever feel like you're walking on a tightrope between reality and imagination? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button45.1" class="answer_button">🔘</button>Yes, it's like my inner world and the outside world blend.</p>
+            <p class="answer_text"> <button id="answer_button45.2" class="answer_button">🔘</button>No, my mental experiences are distinct from what I perceive with my senses.</p>
+            <p class="answer_text"> <button id="answer_button45.3" class="answer_button">🔘</button>Occasionally, I might have fleeting mental images that feel blurry, but they fade.</p>
+            <p class="answer_text"> <button id="answer_button45.4" class="answer_button">🔘</button>I'm not sure, my mind can be vivid, but I can tell what's real and imagined.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q46">
+        <h3 id="question_text"> Imagine you hear a voice whispering your name when no one else is around. What would you do? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button46.1" class="answer_button">🔘</button>Freeze and listen intently, trying to discern the direction and nature of the voice. </p>
+            <p class="answer_text"> <button id="answer_button46.2" class="answer_button">🔘</button>Head to the nearest populated area or source of help, seeking safety and clarification.</p>
+            <p class="answer_text"> <button id="answer_button46.3" class="answer_button">🔘</button>Scan your surroundings carefully, searching for any potential source of the sound.</p>
+            <p class="answer_text"> <button id="answer_button46.4" class="answer_button">🔘</button>Ignore it completely, assuming it's a trick of the mind or external noise. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q47">
+        <h3 id="question_text"> How often do your moods change? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button47.1" class="answer_button">🔘</button>Oh, I'm the moodiest person I know. I’m crying this second and the next second, I’m rolling on the floor laughing.</p>
+            <p class="answer_text"> <button id="answer_button47.2" class="answer_button">🔘</button>I’m not moody but usually just sad</p>
+            <p class="answer_text"> <button id="answer_button47.3" class="answer_button">🔘</button>I only feel moody when I’m sick or(for females when on my period)</p>
+            <p class="answer_text"> <button id="answer_button47.4" class="answer_button">🔘</button>I’m a pretty stable minded person. I know what to do and how to feel at most times.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q48">
+        <h3 id="question_text"> Has there ever been a time when you felt like people were talking about you behind your back, even though you weren't sure if it was true? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button48.1" class="answer_button">🔘</button>It feels like a very common occurrence, I feel like people are talking crap about me behind my back all the time!</p>
+            <p class="answer_text"> <button id="answer_button48.2" class="answer_button">🔘</button>Occasionally, I might have a fleeting suspicion, but it quickly passes.</p>
+            <p class="answer_text"> <button id="answer_button48.3" class="answer_button">🔘</button>This happens sometimes (very rarely), and it can make me feel uneasy or anxious.</p>
+            <p class="answer_text"> <button id="answer_button48.4" class="answer_button">🔘</button>No, I trust my friends and colleagues to be respectful.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q49">
+        <h3 id="question_text"> You’re just home from school, how energetic do you feel? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button49.1" class="answer_button">🔘</button>Energetic?? What is energy again? I’m almost dead and super tired by the time i get home from school</p>
+            <p class="answer_text"> <button id="answer_button49.2" class="answer_button">🔘</button>I’m always tired and only have enough energy to complete my homework before hitting the bed</p>
+            <p class="answer_text"> <button id="answer_button49.3" class="answer_button">🔘</button>It depends on the workload at school and my sleep schedule</p>
+            <p class="answer_text"> <button id="answer_button49.4" class="answer_button">🔘</button>I’m always energetic. I don’t understand how people can be tired from just going to school. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q50">
+        <h3 id="question_text"> Do you get enough sleep everyday? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button50.1" class="answer_button">🔘</button>Oh I wish! Getting 4 hours of sleep per day is a blessing while 8 hours just feels impossible</p>
+            <p class="answer_text"> <button id="answer_button50.2" class="answer_button">🔘</button>Not really but I make sure to get a minimum of 6-7 hours of sleep, after all it's important for my body to function properly</p>
+            <p class="answer_text"> <button id="answer_button50.3" class="answer_button">🔘</button> I mostly never get more than 5 hours of sleep</p>
+            <p class="answer_text"> <button id="answer_button50.4" class="answer_button">🔘</button>Of course! Sleep is more important than anything else. I value sleep above anything and everything. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q51">
+        <h3 id="question_text"> You’re meeting your friend after a long time, how do you act?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button51.1" class="answer_button">🔘</button>I feel like i really just don’t care about them anymore </p>
+            <p class="answer_text"> <button id="answer_button51.2" class="answer_button">🔘</button>I’m not going to go meet them, how dare they stay far from me?</p>
+            <p class="answer_text"> <button id="answer_button51.3" class="answer_button">🔘</button>I don’t know, I don’t feel like talking to her/him anymore, now that it’s been a long time.</p>
+            <p class="answer_text"> <button id="answer_button51.4" class="answer_button">🔘</button> OMG yay!! I finally get to meet my friend! This day is gonna be the best, just like everyday was when we were good friends back in the day. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q52">
+        <h3 id="question_text"> You just came back from a long day at school. You pull out your todo list and realize you have a HUGE physics test next week. What do you do?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button52.1" class="answer_button">🔘</button>Give up and blindly take the test, as you are too tired to do any work.</p>
+            <p class="answer_text"> <button id="answer_button52.2" class="answer_button">🔘</button>Put the studying off for another day in the week.</p>
+            <p class="answer_text"> <button id="answer_button52.3" class="answer_button">🔘</button>Ask a friend to help me study because I'm responsible, and can acknowledge when I need help.</p>
+            <p class="answer_text"> <button id="answer_button52.4" class="answer_button">🔘</button> Start planning a study schedule and keep studying until the day of the test. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q53">
+        <h3 id="toobigquestion_text"> You are having a really bad day, and all of a sudden a tiny misunderstanding with a colleague/friend seems to be the last straw of your misery. How do you react to your colleague/friend, despite through all the bad things you've gone through in the day? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text2big"> <button id="answer_button53.1" class="answer_button">🔘</button>I don't know, I want to cry and shout at this person but I simply can't bring myself to. Afterall, its my fault that I'm having a bad day not theirs! I'm so stressed and confused that, I think I may even cry on the spot.</p>
+            <p class="answer_text2big"> <button id="answer_button53.2" class="answer_button">🔘</button>I want to cry and shout at my friend for making this day the worst. But deep down inside, I know this is definetly my fault, and I'm just taking out my anger on them because I genuinely don't know how to cope or who to find to help console me. </p>
+            <p class="answer_text2big"> <button id="answer_button53.3" class="answer_button">🔘</button>I mean sure I'm having a bad day, but everyone gets these type of problems on in a while. I may yell at my friend in frustration, but I will definelty explain and make things up with them later if needed. </p>
+            <p class="answer_text2big"> <button id="answer_button53.4" class="answer_button">🔘</button> Yes I had a bad day, but there is no way I'd take out my anger on a dear colleague. Who knows, maybe their going through the same thing too... I will try my absolute best to be the bigger person, and react calm and rationally. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q54">
+        <h3 id="question_text"> How would you describe your change in appetite over the past few weeks? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button54.1" class="answer_button">🔘</button>It’s very drastic; I’ve started eating a lot more/less than before. </p>
+            <p class="answer_text"> <button id="answer_button54.2" class="answer_button">🔘</button>I eat normally but I’ve started wanting to eat more/less. </p>
+            <p class="answer_text"> <button id="answer_button54.3" class="answer_button">🔘</button>I eat mostly whenever I want to, so I don’t pay attention.</p>
+            <p class="answer_text"> <button id="answer_button54.4" class="answer_button">🔘</button>I think my appetite has been pretty stable.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q55">
+        <h3 id="question_text"> Do your arms and/or legs feel heavier than usual? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button55.1" class="answer_button">🔘</button>Yes, as if there are weights on them. I struggle to lift them up. </p>
+            <p class="answer_text"> <button id="answer_button55.2" class="answer_button">🔘</button>Sometimes I feel a bit sluggish but it’s not too extreme. I can’t explain it, either, because I’m not usually tired. </p>
+            <p class="answer_text"> <button id="answer_button55.3" class="answer_button">🔘</button>They do feel a little heavy sometimes, but mostly because I’m tired.</p>
+            <p class="answer_text"> <button id="answer_button55.4" class="answer_button">🔘</button>No, they don't feel heavy.</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q56">
+        <h3 id="question_text">  If someone starts to criticize you in a public setting, how would you react?</h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button56.1" class="answer_button">🔘</button>I would shout at them and wait patiently until they forgive me. It's not fair for them to demean my worth, without knowing what I'm going through. </p>
+            <p class="answer_text"> <button id="answer_button56.2" class="answer_button">🔘</button>I would say something offensive back towards them, as they have to know how it feels to be hurt. </p>
+            <p class="answer_text"> <button id="answer_button56.3" class="answer_button">🔘</button>I would defend myself, and then leave the scene, because I don’t want to stay in the area if they don’t respect me. </p>
+            <p class="answer_text"> <button id="answer_button56.4" class="answer_button">🔘</button>I wouldn't say anything, who are they and why does their opinion matter to me anyway?</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q57">
+        <h3 id="question_text">  Do you know anyone from your family who has been suffering from Bipolar or persistent depression? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button57.1" class="answer_button">🔘</button>Yes, I know family member/s who has/have both bipolar and persistent depression disorders. </p>
+            <p class="answer_text"> <button id="answer_button57.2" class="answer_button">🔘</button>I think I know someone in my family who may have these disorders. </p>
+            <p class="answer_text"> <button id="answer_button57.3" class="answer_button">🔘</button>I'm not exactly sure, but most likely I don't think so.  </p>
+            <p class="answer_text"> <button id="answer_button57.4" class="answer_button">🔘</button>No, none of my family members have either bipolar or persistent depression disorders</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q58">
+        <h3 id="question_text">  Have you suffered any major or chronic injuries? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button58.1" class="answer_button">🔘</button>Yes, I have suffered from a major and chronic injury at some point of my life.</p>
+            <p class="answer_text"> <button id="answer_button58.2" class="answer_button">🔘</button>Yes, I have suffered a major OR chronice injury at some point of my life. </p>
+            <p class="answer_text"> <button id="answer_button58.3" class="answer_button">🔘</button>I'm not exactly sure, but most likely I don't think so.  </p>
+            <p class="answer_text"> <button id="answer_button58.4" class="answer_button">🔘</button>No, none of my family members have either bipolar or persistent depression disorders</p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q59">
+        <h3 id="question_text">  Do you recall any memories of suffering from severe trauma when you were younger, specifcally because of a family member or someone you knew really well? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button59.1" class="answer_button">🔘</button>Yes, I distinctly have memories of this, and sometimes I still get nightmares...</p>
+            <p class="answer_text"> <button id="answer_button59.2" class="answer_button">🔘</button>I mean, I think so, I don't exactly remember, but I'm pretty sure. </p>
+            <p class="answer_text"> <button id="answer_button59.3" class="answer_button">🔘</button>I'm not exactly sure, but most likely I don't think so, and even if I did go through something like that, it hasn't had the worst impact on me.  </p>
+            <p class="answer_text"> <button id="answer_button59.4" class="answer_button">🔘</button>No, I don't have any memories of such instances. </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q60">
+        <h3 id="question_text">  Your childhood friend calls you and asks you to join him in a game of basketball (one of your favorite activities since a child!). How would you respond? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button60.1" class="answer_button">🔘</button>Hey dude, I don’t feel right playing anything right now. I am just going to sleep.</p>
+            <p class="answer_text"> <button id="answer_button60.2" class="answer_button">🔘</button>Sorry dude, I have a massive amount of homework to do. Can we play some other time?</p>
+            <p class="answer_text"> <button id="answer_button60.3" class="answer_button">🔘</button>I'll join if we play soccer instead.</p>
+            <p class="answer_text"> <button id="answer_button60.4" class="answer_button">🔘</button>Sure dude, I will be there in 10 minutes! </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q61">
+        <h3 id="question_text">  Do you take drugs or drink alcohol? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button61.1" class="answer_button">🔘</button>Yes, I frequently drink alcohol and sometimes take drugs</p>
+            <p class="answer_text"> <button id="answer_button61.2" class="answer_button">🔘</button>I don’t take any drugs but I do drink alcohol on regular basis</p>
+            <p class="answer_text"> <button id="answer_button61.3" class="answer_button">🔘</button>I don’t take any drugs and occasionally drink alcohol</p>
+            <p class="answer_text"> <button id="answer_button61.4" class="answer_button">🔘</button>Neither do i take drugs nor do I drink alcohol </p>
+        </div>
+    </div>
+
+    <div class="contains hidden" id="q62">
+        <h3 id="question_text"> Have you had any life changing moments which would affect you in an unfortunate way? </h3>
+       </h3>
+        <div id="answer_bank">
+            <p class="answer_text"> <button id="answer_button62.1" class="answer_button">🔘</button>Yes, I am suffering from a great loss which greatly impacts my mood</p>
+            <p class="answer_text"> <button id="answer_button62.2" class="answer_button">🔘</button>Yes, I have been suffering a lot but my mood improves most of time times</p>
+            <p class="answer_text"> <button id="answer_button62.3" class="answer_button">🔘</button>Yes, I am suffering but it does not have any affect on me whatsoever</p>
+            <p class="answer_text"> <button id="answer_button62.4" class="answer_button">🔘</button>No, I am not suffering from any life changing incidents recently. </p>
+        </div>
+    </div>
+
+    <div id="bottom_bar">
+        <button class="homebutton" id="home_button1">🏠</button>
+        <button class="next" id="next_button1"> Next </button>
+        <button class="prefernotbutton" onclick="prefernot()" id="prefernotbutton1">I prefer not to say or feel uncomfortable disclosing this information.</button>
+    </div>
+
+    <center>
+        <div class="contains hidden" id="conclusion">
+            <h3 id="conclusion_heading">Congrats! You have completed your test! </h3>
+            <p id="conclusion_para">I have now gathered a bunch of data about your mental health and consequently generated a list of possible symptoms. Below you can click to see what your possible symptoms are or you can look at how likely you are to have the depressive disorders you were tested for. Please keep in mind that these symptoms and predictions are not final, and cannot be used as a diagnosis. A proper medical professional must evaluate and confirm the following before any action is taken. </p>
+            <button class="buttonsconclusion" id="symptoms_button" onclick="loadsymp"> Upload Data </button>
+            <button class="buttonsconclusion" id="reset"> Sign Out </button>
+        </div>
+    
+    
+    </center>
+
+    <div id="footer"><h2></h2></div>
+</body>
+</html>

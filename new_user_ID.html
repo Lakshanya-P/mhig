@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> MHIG </title>
+
+
+<!--fonts-->
+
+
+<!--bootstrap classes-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+<!--linking css & html-->  
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div id="header"><h2></h2></div>
+
+
+    <div class="container" id="holds_column_2" class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div">
+        <h1 id="title_id_1" class="col-lg-4 col-md-6 col-sm-6 col-xs-11 login_div"> Login ID </h1>
+        <div class="row" id="row_para_1" >
+            <p id="text_para_1"> Above is your login ID. This is very crucial, especially to retrieve data for your next visit, so make sure you note this down! When you come back next time, you will login with this ID. Click the arrow below to continue to your test. </p>
+        </div>
+        <img id="robot_img_1" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOXUweGI4bmVhaDhhNGw2aXo3M2ExdW15ajVyNW83cGY4YTY5ZDJ2eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/q2SDNZYtXz47zC9BoI/giphy.gif">
+        <button id ="next_button_1" onclick = "next_arrow_button()"> ➡️ </button>
+    </div>
+
+
+    <div id="footer"><h2></h2></div>
+
+
+    <script type="module">
+         // Import the functions you need from the SDKs you need
+         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+           import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
+
+
+           // Your web app's Firebase configuration
+           const firebaseConfig = {
+               apiKey: "AIzaSyCEjbKjo7bLbXsLm2FFS3nb5TjXNXMg2lc",
+               authDomain: "mhig-edde5.firebaseapp.com",
+               projectId: "mhig-edde5",
+               storageBucket: "mhig-edde5.appspot.com",
+               messagingSenderId: "855050639590",
+               appId: "1:855050639590:web:84c985fb7c8e066681c327"
+           };
+
+
+           // Initialize Firebase
+           const app = initializeApp(firebaseConfig);
+
+
+           // get ref to database services
+           const mhig = getDatabase(app);
+
+
+           //other code beginnsssss
+           document.addEventListener("DOMContentLoaded", function() {
+             // Retrieve user ID from local storage
+             const userID = localStorage.getItem("userID");
+             // Basically if userId is null, the key doesn’t exist in the local storage
+            if (userID){
+                 document.getElementById("title_id_1").textContent = userID;
+            } else {
+                  document.getElementById("title_id_1").textContent = 'error displaying';
+            }    
+         });
+
+         document.getElementById("next_button_1").addEventListener("click",next_arrow_button);
+         function next_arrow_button(e) {
+               e.preventDefault();
+               window.location.replace("q1.html")
+         }
+
+
+    </script>
+
+
+</body>
+</html>
+
+
+
